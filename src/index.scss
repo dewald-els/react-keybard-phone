@@ -1,0 +1,183 @@
+$border-color-base: #e0e0e0;
+$border-color-focus: #89743a;
+$border-color-error: #c4505d;
+$text-dark: #212121;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --primaryColor: #6b6bec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+input, button {
+  font-family: inherit;
+  font-size: 1.25rem;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit;
+  padding: 1rem;
+  display: block;
+  height: 72px;
+}
+
+input {
+  display: block;
+  outline: none;
+  font-size: 30px;
+  padding: 10px 10px 10px 16px;
+  height: 72px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 2px solid $border-color-base;
+  color: $text-dark;
+}
+
+input.focused, input:focus, input:active, input:hover {
+  border: 2px solid var(--primaryColor);
+  outline: none;
+}
+
+.keyboard-container {
+  background: #C0C0C0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 388px;
+  display: inline-flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.react-simple-keyboard {
+  font-family: 'Inter' !important;
+  font-size: 36px;
+  line-height: 44px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 1px;
+  padding-top: 30px !important;
+
+  &.hg-layout-phone {
+    .hg-row {
+      div.hg-button-enter, div.hg-button-bksp {
+        max-width: 72px;
+      }
+    }
+  }
+
+  .hg-row {
+    margin-bottom: 12px !important;
+    justify-content: center;
+
+    .hg-button {
+      /* white */
+      margin-left: 12px;
+      margin-right: 0 !important;
+      padding: 0;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(33, 33, 33, 0.1);
+      border-radius: 4px;
+      width: 72px;
+      height: 72px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-items: center;
+      align-content: center;
+
+      &.hg-standardBtn {
+        max-width: 72px;
+      }
+
+      &.hg-standardBtn[data-skbtn="@"] {
+        max-width: 72px;
+      }
+
+      &.hg-button-space {
+        // max-width: 428px;
+        max-width: 545px;
+      }
+
+      &.hg-button-alt {
+        width: 160px;
+        max-width: 160px;
+      }
+
+      &.hg-button-default {
+        min-width: 160px;
+      }
+
+      &.hg-button-bksp {
+        max-width: 124px;
+      }
+
+      &.hg-button-enter {
+        max-width: 124px;
+        background: var(--primaryColor);
+        opacity: 0.38;
+
+        &.enabled {
+          opacity: 1;
+
+          &.hg-activeButton {
+            filter: brightness(0.9);
+          }
+        }
+      }
+
+      &.hg-button-default {
+        max-width: 138px;
+      }
+
+      &.hg-button-downkeyboard {
+        max-width: 104px;
+      }
+
+      &.hg-button-back {
+        max-width: 72px;
+        opacity: 0;
+      }
+
+      &.hg-button-fwd {
+        max-width: 72px;
+        opacity: 0;
+      }
+    }
+
+    .hg-button:first-child {
+      margin-left: 0;
+    }
+  }
+
+  .hg-row:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.keyboard-front {
+  z-index: 100000;
+}
