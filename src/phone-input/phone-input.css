@@ -21,9 +21,9 @@
     margin-right: 0.5rem;
 }
 
-
 .phone-input__country-search {
     position: absolute;
+    z-index: 99;
     top: 72px;
     left: 0;
     width: 100%;
@@ -35,8 +35,10 @@
 
 .phone-input__country-search__list {
     max-height: 374px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding: 20px;
+    background: white;
 }
 
 .phone-input__country-search__list__item {

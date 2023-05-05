@@ -2,7 +2,9 @@ import "./phone-input.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { KeyboardReact, SimpleKeyboard } from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
-import { countries, Country, getEmojiFlag } from "countries-list";
+import { getEmojiFlag } from "countries-list";
+import { CountryWithCode } from "../types.ts";
+import { countriesWithCode } from "../utils.ts";
 
 const keyboardDisplay = {
 	"{alt}": ".?123",
@@ -33,6 +35,8 @@ const keyboardDisplay = {
 type PhoneInputProps = {
 	defaultValue?: string;
 	defaultCountryCode: string;
+	onPhoneNumberChanged?: (phoneNumber: string) => void;
+	onCountryChanged?: (country: CountryWithCode) => void;
 }
 
 type PhoneInputState = {
@@ -45,17 +49,10 @@ enum PhoneInputs {
 	countrySearch = "countrySearch"
 }
 
-type CountryWithCode = Country & { code: string };
-const countriesWithCode: CountryWithCode[] = Object.keys(countries).map((countryCode: string) => {
-	return {
-		...(countries as Record<string, Country>)[countryCode],
-		code: countryCode,
-	};
-});
 
 const PhoneInput = (props: PhoneInputProps) => {
 
-	const { defaultValue, defaultCountryCode } = props;
+	const { defaultValue, defaultCountryCode, onPhoneNumberChanged, onCountryChanged } = props;
 	const keyboardRef = useRef<SimpleKeyboard | null>(null);
 	const [phoneCountry, setPhoneCountry] = useState<CountryWithCode>(
 		countriesWithCode.find((country: CountryWithCode) => country.code === defaultCountryCode) as CountryWithCode);
@@ -87,6 +84,7 @@ const PhoneInput = (props: PhoneInputProps) => {
 				phoneInputRef.current!.focus();
 			}, 10);
 		}
+		onPhoneNumberChanged && onPhoneNumberChanged(inputs.phoneNumber);
 	}, [inputs.phoneNumber]);
 
 	useEffect(() => {
@@ -117,7 +115,7 @@ const PhoneInput = (props: PhoneInputProps) => {
 
 		keyboardRef.current?.setCaretPosition(inputs.phoneNumber.length, inputs.phoneNumber.length);
 		phoneInputRef.current!.focus();
-
+		onCountryChanged && onCountryChanged(country);
 	};
 
 	const countryList = useMemo(() => {
